@@ -1,4 +1,5 @@
 import 'package:bask_app/screen/bask_home_screen.dart';
+import 'package:bask_app/screen/item_details_screen.dart';
 import 'package:flutter/material.dart';
 
 //my name is santanu kumar
@@ -15,6 +16,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: BaskHomeScreen(),
+      routes: {
+        '/Item_Details' : (context) => Item_Details_Screen(),
+      },
     );
   }
 }
