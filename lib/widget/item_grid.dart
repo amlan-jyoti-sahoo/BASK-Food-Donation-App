@@ -7,11 +7,11 @@ class ItemGrid extends StatelessWidget {
 
    List<FoodTranscation> loadedFood = [];
 
- void selectItem(BuildContext context) {
+ void selectItem(BuildContext context,FoodTranscation item) {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (_) {
-            return Item_Details_Screen();
+            return Item_Details_Screen(item: item,);
           },
         ),
       );
@@ -55,7 +55,7 @@ class ItemGrid extends StatelessWidget {
         ),
         itemBuilder: (context, index) {
           return InkWell(
-            onTap: () => selectItem(context),
+            onTap: () => selectItem(context,items[index]),
             splashColor: Colors.blue,
             borderRadius: BorderRadius.circular(15),
             child: Container(

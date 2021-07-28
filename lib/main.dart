@@ -16,9 +16,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: BaskHomeScreen(),
-      routes: {
-        '/Item_Details' : (context) => Item_Details_Screen(),
-      },
+      // routes: {
+      //   '/Item_Details' : (context) => Item_Details_Screen(),
+      // },
     );
   }
 }

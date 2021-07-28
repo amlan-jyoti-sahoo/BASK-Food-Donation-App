@@ -5,26 +5,9 @@ class Item_Details_Screen extends StatelessWidget {
   static const outeName = '/Item-Details';
 
   
+ final FoodTranscation item;
 
-  // final String foodName;
-  // final String quantity;
-  // final String uploadTime;
-  // final String timeLeft;
-  // final String foodType;
-  // final String donorName;
-  // final String contact;
-  // final String pickupAddress;
-
-  // Item_Details_Screen(
-  //   this.foodName,
-  //   this.quantity,
-  //   this.uploadTime,
-  //   this.timeLeft,
-  //   this.foodType,
-  //   this.donorName,
-  //   this.contact,
-  //   this.pickupAddress
-  // );
+  const Item_Details_Screen({Key? key, required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,56 +15,60 @@ class Item_Details_Screen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Item Details'),
       ),
-      body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              'Food Details:',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-              ),
-            ),
-            Container(
-              height: 300,
-              padding: EdgeInsets.all(30),
-              child: Image.network('null'),
-            ),
-            Text('Food Name: ${null}'),
-            Text('Quantity: ${null}'),
-            Text('Upload time: ${null}'),
-            Text('Time left: ${null}'),
-            Text('Food type: ${null}'),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Donor details:',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-              ),
-            ),
-            Text('Donor name: ${null}'),
-            Text('contact: ${null}'),
-            Text('Pickup Address: ${null}'),
-            SizedBox(
-              height: 30,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: new SizedBox(
-                width: double.infinity,
-                height: 50.0,
-                child: RaisedButton(
-                  child: Text('Book Now'),
-                  onPressed: () {},
-                  color: Colors.blue,
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                'Food Details:',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25,
                 ),
               ),
-            ),
-          ],
+              Container(
+                height: 300,
+                width: double.infinity,
+                padding: EdgeInsets.all(30),
+                child: Image.network(item.foodImage,fit: BoxFit.fill,),
+                
+              ),
+              Text('Food Name: ${item.foodName}'),
+              Text('Quantity: ${item.foodQuantity}'),
+              Text('Upload time: ${item.createdTime}'),
+              Text('Time left: ${null}'),
+              Text('Food type: ${item.foodType}'),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Donor details:',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25,
+                ),
+              ),
+              Text('Donor name: ${item.donor.name}'),
+              Text('contact: ${item.donor.phoneNumber}'),
+              Text('Pickup Address: ${item.donor.addressDetails}'),
+              SizedBox(
+                height: 30,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: new SizedBox(
+                  width: double.infinity,
+                  height: 50.0,
+                  child: RaisedButton(
+                    child: Text('Book Now'),
+                    onPressed: () {},
+                    color: Colors.blue,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
