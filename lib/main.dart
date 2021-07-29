@@ -1,5 +1,4 @@
 import 'package:bask_app/screen/bask_home_screen.dart';
-import 'package:bask_app/screen/item_details_screen.dart';
 import 'package:flutter/material.dart';
 
 //my name is santanu kumar
@@ -22,11 +21,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-//fuck 
-//fuck 
-//fuck 
-//fuck 
-//fuck 
-//fuck 
-//fuck 

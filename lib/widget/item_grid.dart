@@ -23,7 +23,6 @@ class ItemGrid extends StatelessWidget {
         future: FoodTranscationApi.getAvailableItem(),
         builder: (context, snapshot) {
           final items = snapshot.data;
-
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
               return Center(child: CircularProgressIndicator());
