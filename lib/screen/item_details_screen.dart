@@ -1,13 +1,12 @@
 import 'package:bask_app/model/food_transaction.dart';
-import 'package:bask_app/screen/bask_home_screen.dart';
 import 'package:flutter/material.dart';
 
-class Item_Details_Screen extends StatelessWidget {
+class ItemDetailsScreen extends StatelessWidget {
   static const outeName = '/Item-Details';
 
   final FoodTranscation item;
 
-  const Item_Details_Screen({Key? key, required this.item}) : super(key: key);
+  const ItemDetailsScreen({Key? key, required this.item}) : super(key: key);
 
   //Widget to create deatils about food
   Widget buildFoodDetails(String title, String details) {
@@ -30,34 +29,73 @@ class Item_Details_Screen extends StatelessWidget {
   //Widget to create deatils about donor
   Widget buildDonorDeatils(String title, String details) {
     return Column(
-      children:[ Row(
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.grey,
-            ),
-          ),
-          Expanded(
-            child: Text(
-              details,
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
               style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.blue,
+                fontSize: 16,
+                color: Colors.grey,
               ),
             ),
-          ),
-        ],
-      ),
-    SizedBox(height: 10,),
-      ],);
+            Expanded(
+              child: Text(
+                details,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10,
+        ),
+      ],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: BackButton(
+          color: Colors.black,
+        ),
+        title: Text(
+          'Food Deatils',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 30,
+          ),
+        ),
+        centerTitle: true,
+        actions: [
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 28.0),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.green, Colors.blue],
+              ),
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: IconButton(
+              icon: Icon(
+                Icons.shopping_basket_sharp,
+                color: Colors.white,
+              ),
+              onPressed: () {},
+            ),
+          ),
+        ],
+      ),
       bottomNavigationBar: GestureDetector(
         onTap: () {},
         child: Container(
@@ -91,55 +129,49 @@ class Item_Details_Screen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.arrow_back,
-                        size: 40,
-                        color: Colors.black,
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) {
-                              return BaskHomeScreen();
-                            },
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  Container(
-                    child: Text(
-                      'Food Deatils',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 28.0),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Colors.green, Colors.blue],
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.shopping_basket_sharp,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 24.0),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Container(
+              //       child: IconButton(
+              //         icon: Icon(
+              //           Icons.arrow_back,
+              //           size: 40,
+              //           color: Colors.black,
+              //         ),
+              //         onPressed: () {
+              //           Navigator.of(context).pop();
+              //         },
+              //       ),
+              //     ),
+              //     Container(
+              //       child: Text(
+              //         'Food Deatils',
+              //         style: TextStyle(
+              //           fontWeight: FontWeight.bold,
+              //           fontSize: 30,
+              //         ),
+              //       ),
+              //     ),
+              //     Container(
+              //       margin: EdgeInsets.symmetric(horizontal: 28.0),
+              //       decoration: BoxDecoration(
+              //         gradient: LinearGradient(
+              //           colors: [Colors.green, Colors.blue],
+              //         ),
+              //         borderRadius: BorderRadius.circular(8.0),
+              //       ),
+              //       child: IconButton(
+              //         icon: Icon(
+              //           Icons.shopping_basket_sharp,
+              //           color: Colors.white,
+              //         ),
+              //         onPressed: () {},
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // SizedBox(height: 24.0),
               Text(
                 item.foodName,
                 style: TextStyle(
@@ -154,10 +186,14 @@ class Item_Details_Screen extends StatelessWidget {
                 padding: EdgeInsets.only(
                   right: 30,
                 ),
-                child: Image.network(
-                  item.foodImage,
-                  height: 300,
-                  width: double.infinity,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  child: Image.network(
+                    item.foodImage,
+                    height: 300,
+                    width: double.infinity,
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
               Padding(
@@ -186,9 +222,9 @@ class Item_Details_Screen extends StatelessWidget {
                     //3rd column
                     Column(
                       children: [
-                        buildFoodDetails('Time left', 'null'),
+                        buildFoodDetails('Time left', item.timeLeft),
                         SizedBox(height: 20),
-                        buildFoodDetails('Status', 'null'),
+                        buildFoodDetails('Status', item.status.statusState),
                       ],
                     ),
                   ],
@@ -213,17 +249,17 @@ class Item_Details_Screen extends StatelessWidget {
                     padding: EdgeInsets.all(10),
                     child: Column(
                       children: [
-                        buildDonorDeatils('Name :',item.donor.name),
-                        buildDonorDeatils('Contact :',item.donor.phoneNumber),
-                        buildDonorDeatils('Email :',item.donor.email),
-                        buildDonorDeatils('Address :','ddjkjfksdjklfjkljsdakljfkljasdklfjkljsadklfjksadjklfjklasdjklfjklsdjkfjk'),
-                        buildDonorDeatils('Area :',item.donor.area),
-                        buildDonorDeatils('District :',item.donor.district.districtName),
+                        buildDonorDeatils('Name :', item.donor.name),
+                        buildDonorDeatils('Contact :', item.donor.phoneNumber),
+                        buildDonorDeatils('Email :', item.donor.email),
+                        buildDonorDeatils('Address :',
+                            '${item.donor.addressDetails} , ${item.donor.area} , ${item.donor.district.districtName}'),
                       ],
                     ),
                   ),
                 ),
               ),
+              SizedBox(height: 24.0)
             ],
           ),
         ),

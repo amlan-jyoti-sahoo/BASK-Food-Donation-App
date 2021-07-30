@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:bask_app/model/status.dart';
 import 'package:bask_app/model/user.dart';
+import 'package:flutter/cupertino.dart';
 
-class FoodTranscation {
+class FoodTranscation with ChangeNotifier {
   int transactionId;
   String foodName;
   String foodImage;
@@ -53,5 +56,26 @@ class FoodTranscation {
         receiver: json['receiver'] != null
             ? User.fromJson(json['reseivedTime'])
             : null);
+  }
+
+  String timeLeft = '00:00:00';
+  String twoDigits(int n) => n.toString().padLeft(2, "0");
+  void startTimer() {
+    Timer.periodic(Duration(seconds: 1), (_) {
+      DateTime dtNow = DateTime.now();
+      DateTime dtExp = createdTime.add(Duration(hours: availableDuration));
+      Duration diff = dtExp.difference(dtNow);
+      int diffSec = diff.inSeconds.remainder(60);
+      int diffMin = diff.inMinutes.remainder(60);
+      int diffHour = diff.inHours;
+
+      if (diffSec >= 0) {
+        timeLeft =
+            '${twoDigits(diffHour)}:${twoDigits(diffMin)}:${twoDigits(diffSec)}';
+      } else {
+        timeLeft = '00:00:00';
+      }
+      notifyListeners();
+    });
   }
 }
