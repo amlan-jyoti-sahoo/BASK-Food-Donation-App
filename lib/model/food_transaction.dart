@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bask_app/model/status.dart';
 import 'package:bask_app/model/user.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
 
 class FoodTranscation with ChangeNotifier {
   int transactionId;
@@ -63,7 +64,8 @@ class FoodTranscation with ChangeNotifier {
   void startTimer() {
     Timer.periodic(Duration(seconds: 1), (_) {
       DateTime dtNow = DateTime.now();
-      DateTime dtExp = createdTime.add(Duration(hours: availableDuration));
+      DateTime localCreatedTime = createdTime.add(dtNow.timeZoneOffset);
+      DateTime dtExp = localCreatedTime.add(Duration(hours: availableDuration));
       Duration diff = dtExp.difference(dtNow);
       int diffSec = diff.inSeconds.remainder(60);
       int diffMin = diff.inMinutes.remainder(60);
