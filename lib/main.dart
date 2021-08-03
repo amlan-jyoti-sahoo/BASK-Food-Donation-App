@@ -1,5 +1,7 @@
 import 'package:bask_app/screen/bask_home_screen.dart';
+import 'package:bask_app/screen/splash_screen.dart';
 import 'package:flutter/material.dart';
+
 
 //my name is santanu kumar
 void main() {
@@ -15,7 +17,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: BaskHomeScreen(),
+      home: SpalshScreen(),
+      // BaskHomeScreen(),
       // routes: {
       //   '/Item_Details' : (context) => Item_Details_Screen(),
       // },
