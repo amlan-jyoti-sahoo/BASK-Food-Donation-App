@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BASK</string>
+    <string name="facebook_app_id">569922617756027</string>
+    <string name="fb_login_protocol_scheme">fb569922617756027</string>
+</resources>

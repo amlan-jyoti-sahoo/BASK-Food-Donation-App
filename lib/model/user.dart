@@ -1,39 +1,56 @@
-import 'package:bask_app/model/District.dart';
-
 class User {
-  String uid;
-  String name;
-  String roleId;
-  String phoneNumber;
-  String districtId;
-  String area;
-  String addressDetails;
+  String firstName;
+  String lastName;
   String email;
-  District district;
+  String? password;
+  String role;
+  int ratingCount;
+  int avgRating;
+  int donationCount;
+  String phoneNumber;
+  String defaultAddressId;
+  DateTime joinedOn;
 
   User({
-    required this.uid,
-    required this.name,
-    required this.roleId,
-    required this.phoneNumber,
-    required this.districtId,
-    required this.area,
-    required this.addressDetails,
+    required this.firstName,
+    required this.lastName,
     required this.email,
-    required this.district,
+    this.password,
+    required this.role,
+    required this.phoneNumber,
+    required this.ratingCount,
+    required this.avgRating,
+    required this.donationCount,
+    required this.defaultAddressId,
+    required this.joinedOn,
   });
 
   static User fromJson(json) {
     return User(
-      uid: json['uid'],
-      name: json['name'],
-      roleId: json['roleId'],
-      phoneNumber: json['phoneNumber'],
-      districtId: json['districtId'],
-      area: json['area'],
-      addressDetails: json['addressDetails'],
-      email: json['email'],
-      district: District.fromJson(json['district']),
-    );
+        firstName: json['first name'],
+        lastName: json['last name'],
+        email: json['email'],
+        role: json['role'],
+        phoneNumber: json['phone'],
+        ratingCount: json['rating count'],
+        avgRating: json['avg rating'],
+        donationCount: json['donation count'],
+        defaultAddressId: json['default address id'],
+        joinedOn: json['joined on']);
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['first name'] = this.firstName;
+    data['last name'] = this.lastName;
+    data['email'] = this.email;
+    data['role'] = this.role;
+    data['phone'] = this.phoneNumber;
+    data['rating count'] = this.ratingCount;
+    data['avg rating'] = this.avgRating;
+    data['avg rating'] = this.avgRating;
+    data['donation count'] = this.donationCount;
+    data['joined on'] = this.joinedOn;
+    return data;
   }
 }

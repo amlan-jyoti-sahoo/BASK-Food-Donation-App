@@ -1,11 +1,11 @@
-import 'package:bask_app/model/food_transaction.dart';
+import 'package:bask_app/model/donation.dart';
 import 'package:bask_app/screen/item_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ItemCard extends StatelessWidget {
   const ItemCard({Key? key}) : super(key: key);
-  void selectItem(BuildContext context, FoodTranscation item) {
+  void selectItem(BuildContext context, Donation item) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) {
@@ -19,7 +19,7 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var item = Provider.of<FoodTranscation>(context, listen: false);
+    var item = Provider.of<Donation>(context, listen: false);
     item.startTimer();
     return InkWell(
       onTap: () => selectItem(context, item),
@@ -96,16 +96,15 @@ class ItemCard extends StatelessWidget {
                               SizedBox(
                                 width: 3,
                               ),
-                              Text(
-                                  '${item.donor.area}, ${item.donor.district.districtName}',
+                              Text('${item.address.area}, ${item.address.city}',
                                   style: TextStyle(
                                       fontWeight: FontWeight.w800,
                                       color: Colors.brown)),
                             ],
                           ),
-                          Consumer<FoodTranscation>(
+                          Consumer<Donation>(
                             builder: (ctx, item, child) => Text(
-                              '${item.timeLeft} left',
+                              '${item.timeLeft}',
                               style: TextStyle(
                                 fontWeight: FontWeight.w800,
                                 color: Colors.blue,

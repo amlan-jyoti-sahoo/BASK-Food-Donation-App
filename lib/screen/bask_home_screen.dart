@@ -1,10 +1,16 @@
+import 'package:bask_app/screen/sign_up_and_user_detail_screen.dart';
+import 'package:bask_app/services/auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 import 'home_screen.dart';
 
 class BaskHomeScreen extends StatefulWidget {
+  const BaskHomeScreen({Key? key, required this.isNewUser}) : super(key: key);
+
   @override
   _BaskHomeScreenState createState() => _BaskHomeScreenState();
+
+  final bool isNewUser;
 }
 
 class _BaskHomeScreenState extends State<BaskHomeScreen> {
@@ -33,6 +39,25 @@ class _BaskHomeScreenState extends State<BaskHomeScreen> {
     ),
   ];
 
+  void _logout() async {
+    final auth = Provider.of<Auth>(context, listen: false);
+    await auth.signOut();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      if (widget.isNewUser) {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (_) {
+            return SignUpScreen(isThirdpartySignup: true);
+          },
+        ));
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +72,12 @@ class _BaskHomeScreenState extends State<BaskHomeScreen> {
             icon: Icon(Icons.notifications_none),
             onPressed: () {},
           ),
+          TextButton(
+              onPressed: _logout,
+              child: Text(
+                'Logout',
+                style: TextStyle(color: Colors.white),
+              ))
         ],
         flexibleSpace: Container(
           decoration: BoxDecoration(

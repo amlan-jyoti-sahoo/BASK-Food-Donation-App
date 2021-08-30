@@ -1,17 +1,16 @@
-import 'package:bask_app/api/food_transaction_api.dart';
-import 'package:bask_app/model/food_transaction.dart';
+import 'package:bask_app/model/donation.dart';
+import 'package:bask_app/services/firestoreApi.dart';
 import 'package:bask_app/widget/item_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ItemGrid extends StatelessWidget {
-  List<FoodTranscation> loadedFood = [];
-
   @override
   Widget build(BuildContext context) {
+    final database = Provider.of<FirestoreApi>(context, listen: false);
     return Scaffold(
-      body: FutureBuilder<List<FoodTranscation>>(
-        future: FoodTranscationApi.getAvailableItem(),
+      body: StreamBuilder<List<Donation>>(
+        stream: database.getDonationStream(),
         builder: (context, snapshot) {
           final items = snapshot.data;
           switch (snapshot.connectionState) {
@@ -29,7 +28,7 @@ class ItemGrid extends StatelessWidget {
     );
   }
 
-  Widget buildItemGrid(List<FoodTranscation> items) {
+  Widget buildItemGrid(List<Donation> items) {
     return Container(
       child: GridView.builder(
         padding: const EdgeInsets.all(10.0),
@@ -40,9 +39,8 @@ class ItemGrid extends StatelessWidget {
           crossAxisSpacing: 10,
           mainAxisSpacing: 15,
         ),
-        itemBuilder: (context, index) =>
-            ChangeNotifierProvider<FoodTranscation>.value(
-                value: items[index], child: ItemCard()),
+        itemBuilder: (context, index) => ChangeNotifierProvider<Donation>.value(
+            value: items[index], child: ItemCard()),
       ),
     );
   }

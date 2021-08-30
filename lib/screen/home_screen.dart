@@ -30,9 +30,7 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
-            height: MediaQuery.of(context).size.height * 0.65,
-            child: ItemGrid())
+        Expanded(child: ItemGrid())
       ],
     );
   }

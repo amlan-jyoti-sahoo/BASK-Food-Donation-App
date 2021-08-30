@@ -1,10 +1,10 @@
-import 'package:bask_app/model/food_transaction.dart';
+import 'package:bask_app/model/donation.dart';
 import 'package:flutter/material.dart';
 
 class ItemDetailsScreen extends StatelessWidget {
   static const outeName = '/Item-Details';
 
-  final FoodTranscation item;
+  final Donation item;
 
   const ItemDetailsScreen({Key? key, required this.item}) : super(key: key);
 
@@ -129,49 +129,6 @@ class ItemDetailsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     Container(
-              //       child: IconButton(
-              //         icon: Icon(
-              //           Icons.arrow_back,
-              //           size: 40,
-              //           color: Colors.black,
-              //         ),
-              //         onPressed: () {
-              //           Navigator.of(context).pop();
-              //         },
-              //       ),
-              //     ),
-              //     Container(
-              //       child: Text(
-              //         'Food Deatils',
-              //         style: TextStyle(
-              //           fontWeight: FontWeight.bold,
-              //           fontSize: 30,
-              //         ),
-              //       ),
-              //     ),
-              //     Container(
-              //       margin: EdgeInsets.symmetric(horizontal: 28.0),
-              //       decoration: BoxDecoration(
-              //         gradient: LinearGradient(
-              //           colors: [Colors.green, Colors.blue],
-              //         ),
-              //         borderRadius: BorderRadius.circular(8.0),
-              //       ),
-              //       child: IconButton(
-              //         icon: Icon(
-              //           Icons.shopping_basket_sharp,
-              //           color: Colors.white,
-              //         ),
-              //         onPressed: () {},
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              // SizedBox(height: 24.0),
               Text(
                 item.foodName,
                 style: TextStyle(
@@ -205,7 +162,7 @@ class ItemDetailsScreen extends StatelessWidget {
                     Column(
                       children: [
                         buildFoodDetails(
-                            'Quantity', item.foodQuantity.toString()),
+                            'Quantity', item.remainingQuantity.toString()),
                         SizedBox(height: 20),
                         buildFoodDetails('Food Type', item.foodType),
                       ],
@@ -215,8 +172,6 @@ class ItemDetailsScreen extends StatelessWidget {
                       children: [
                         buildFoodDetails('Upload Time', 'null'),
                         SizedBox(height: 20),
-                        buildFoodDetails('Duration',
-                            '${item.availableDuration.toString()} Hours'),
                       ],
                     ),
                     //3rd column
@@ -224,7 +179,7 @@ class ItemDetailsScreen extends StatelessWidget {
                       children: [
                         buildFoodDetails('Time left', item.timeLeft),
                         SizedBox(height: 20),
-                        buildFoodDetails('Status', item.status.statusState),
+                        buildFoodDetails('Status', item.status),
                       ],
                     ),
                   ],
@@ -249,11 +204,10 @@ class ItemDetailsScreen extends StatelessWidget {
                     padding: EdgeInsets.all(10),
                     child: Column(
                       children: [
-                        buildDonorDeatils('Name :', item.donor.name),
-                        buildDonorDeatils('Contact :', item.donor.phoneNumber),
-                        buildDonorDeatils('Email :', item.donor.email),
+                        buildDonorDeatils('Name :', item.donorName),
+                        buildDonorDeatils('Contact :', item.donorContact),
                         buildDonorDeatils('Address :',
-                            '${item.donor.addressDetails} , ${item.donor.area} , ${item.donor.district.districtName}'),
+                            '${item.address.addressDetails} , ${item.address.area} , ${item.address.city}'),
                       ],
                     ),
                   ),
