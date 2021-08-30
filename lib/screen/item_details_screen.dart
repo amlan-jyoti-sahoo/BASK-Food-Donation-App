@@ -2,7 +2,7 @@ import 'package:bask_app/model/food_transaction.dart';
 import 'package:flutter/material.dart';
 
 class ItemDetailsScreen extends StatelessWidget {
-  static const outeName = '/Item-Details';
+  static const routeName = '/Item-Details';
 
   final FoodTranscation item;
 
