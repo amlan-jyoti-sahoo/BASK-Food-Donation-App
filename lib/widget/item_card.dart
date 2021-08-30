@@ -1,4 +1,5 @@
 import 'package:bask_app/model/food_transaction.dart';
+import 'package:bask_app/providers/cart.dart';
 import 'package:bask_app/screen/item_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,8 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var item = Provider.of<FoodTranscation>(context, listen: false);
+    final cart = Provider.of<Cart>(context, listen: false);
+
     item.startTimer();
     return InkWell(
       onTap: () => selectItem(context, item),
@@ -59,9 +62,32 @@ class ItemCard extends StatelessWidget {
                   ),
                   Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.shopping_cart_outlined,
-                        size: findCardHeight(context) * 0.15,
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.shopping_cart_outlined,
+                          size: findCardHeight(context) * 0.15,
+                        ),
+                        onPressed: () {
+                          cart.addItem(
+                              item.transactionId.toString(),
+                              item.foodName,
+                              item.donor.addressDetails,
+                              item.foodImage);
+                              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Added Item to cart!'),
+                              duration: Duration(seconds: 2),
+                              action: SnackBarAction(
+                                label: 'UNDO',
+                                onPressed: () {
+                                  cart.removeSingleItem(
+                                      item.transactionId.toString());
+                                },
+                              ),
+                            ),
+                          );
+                        },
                       )),
                 ],
               ),
