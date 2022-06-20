@@ -150,7 +150,7 @@ class _LogInPageState extends State<LogInPage> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 15),
                                 child: Form(
-                                  autovalidate: isTriedToSubmit,
+                                  autovalidateMode: isTriedToSubmit?AutovalidateMode.onUserInteraction:AutovalidateMode.disabled,
                                   key: loginFormkey,
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,

@@ -298,7 +298,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Form(
-                        autovalidate: isTriedToSubmited,
+                        autovalidateMode: isTriedToSubmited?AutovalidateMode.onUserInteraction:AutovalidateMode.disabled,
                         key: signupFormkey,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.end,

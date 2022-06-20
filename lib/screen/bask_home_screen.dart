@@ -35,6 +35,16 @@ class _BaskHomeScreenState extends State<BaskHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> screens = [
+      HomeScreen(moveToCartScreen: () {
+        setState(() {
+          currenttab = 1;
+        });
+      }),
+      CartScreen(),
+      MyDonationScreen(),
+      Center(child: Text('this is profile screen')),
+    ];
     return widget.isNewUser
         ? Container(
             //  loading widget
@@ -45,17 +55,8 @@ class _BaskHomeScreenState extends State<BaskHomeScreen> {
           )
         : Scaffold(
             body: IndexedStack(
+              children: screens,
               index: currenttab,
-              children: <Widget>[
-                HomeScreen(moveToCartScreen: () {
-                  setState(() {
-                    currenttab = 1;
-                  });
-                }),
-                CartScreen(),
-                MyDonationScreen(),
-                Center(child: Text('this is profile screen')),
-              ],
             ),
             floatingActionButton: FloatingActionButton(
               child: Icon(Icons.add),

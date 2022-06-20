@@ -16,8 +16,6 @@ class LoadUserData extends StatefulWidget {
 class _LoadUserDataState extends State<LoadUserData> {
   bool isLoading = true;
   late bool newUser;
-
-  //default user until user is load
   User user = User(
       firstName: '',
       lastName: '',
